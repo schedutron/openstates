@@ -51,3 +51,13 @@ services:
     - .:/opt/openstates/openstates/
     depends_on:
     - mysql
+  dbinit:
+    image: openstates/openstates
+    environment:
+      - DATABASE_URL=postgis://openstates:openstates@postgres/openstates
+    depends_on:
+      - postgres
+    volumes:
+    - .:/opt/openstates/openstates/
+    entrypoint: /opt/openstates/openstates/dbinit.sh
+    #entrypoint: /opt/openstates/venv-pupa/bin/pupa dbinit us
